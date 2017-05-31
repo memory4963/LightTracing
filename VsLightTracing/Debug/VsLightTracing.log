@@ -1,0 +1,18 @@
+﻿  GenerateImage.cpp
+e:\!罗傲\学习\数媒专业课\高级计算机图形学\projects\vslighttracing\vslighttracing\generateimage.cpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+e:\!罗傲\学习\数媒专业课\高级计算机图形学\projects\vslighttracing\vslighttracing\drawable\drawable.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+e:\!罗傲\学习\数媒专业课\高级计算机图形学\projects\vslighttracing\vslighttracing\generateimage.cpp(162): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+e:\!罗傲\学习\数媒专业课\高级计算机图形学\projects\vslighttracing\vslighttracing\generateimage.cpp(208): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+e:\!罗傲\学习\数媒专业课\高级计算机图形学\projects\vslighttracing\vslighttracing\generateimage.cpp(253): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+e:\!罗傲\学习\数媒专业课\高级计算机图形学\projects\vslighttracing\vslighttracing\generateimage.cpp(263): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+e:\!罗傲\学习\数媒专业课\高级计算机图形学\projects\vslighttracing\vslighttracing\generateimage.cpp(290): warning C4305: “参数”: 从“double”到“float”截断
+e:\!罗傲\学习\数媒专业课\高级计算机图形学\projects\vslighttracing\vslighttracing\generateimage.cpp(291): warning C4305: “参数”: 从“double”到“float”截断
+e:\!罗傲\学习\数媒专业课\高级计算机图形学\projects\vslighttracing\vslighttracing\generateimage.cpp(292): warning C4305: “参数”: 从“double”到“float”截断
+e:\!罗傲\学习\数媒专业课\高级计算机图形学\projects\vslighttracing\vslighttracing\generateimage.cpp(295): warning C4305: “参数”: 从“double”到“float”截断
+e:\!罗傲\学习\数媒专业课\高级计算机图形学\projects\vslighttracing\vslighttracing\generateimage.cpp(296): warning C4305: “参数”: 从“double”到“float”截断
+e:\!罗傲\学习\数媒专业课\高级计算机图形学\projects\vslighttracing\vslighttracing\generateimage.cpp(297): warning C4305: “参数”: 从“double”到“float”截断
+e:\!罗傲\学习\数媒专业课\高级计算机图形学\projects\vslighttracing\vslighttracing\generateimage.cpp(298): warning C4305: “参数”: 从“double”到“float”截断
+e:\!罗傲\学习\数媒专业课\高级计算机图形学\projects\vslighttracing\vslighttracing\generateimage.cpp(299): warning C4305: “参数”: 从“double”到“float”截断
+e:\!罗傲\学习\数媒专业课\高级计算机图形学\projects\vslighttracing\vslighttracing\generateimage.cpp(304): warning C4305: “参数”: 从“double”到“float”截断
+  VsLightTracing.vcxproj -> E:\!罗傲\学习\数媒专业课\高级计算机图形学\projects\VsLightTracing\Debug\VsLightTracing.exe
+  VsLightTracing.vcxproj -> E:\!罗傲\学习\数媒专业课\高级计算机图形学\projects\VsLightTracing\Debug\VsLightTracing.pdb (Partial PDB)

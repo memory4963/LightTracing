@@ -1,0 +1,31 @@
+﻿  BallDrawable.cpp
+e:\!罗傲\学习\数媒专业课\高级计算机图形学\projects\vslighttracing\vslighttracing\drawable\Drawable.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+  BoxDrawable.cpp
+e:\!罗傲\学习\数媒专业课\高级计算机图形学\projects\vslighttracing\vslighttracing\drawable\Drawable.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+e:\!罗傲\学习\数媒专业课\高级计算机图形学\projects\vslighttracing\vslighttracing\drawable\Drawable.h(37): error C3646: “generateBox”: 未知重写说明符
+e:\!罗傲\学习\数媒专业课\高级计算机图形学\projects\vslighttracing\vslighttracing\drawable\Drawable.h(37): error C2059: 语法错误:“)”
+e:\!罗傲\学习\数媒专业课\高级计算机图形学\projects\vslighttracing\vslighttracing\drawable\Drawable.h(37): error C2238: 意外的标记位于“;”之前
+  Drawable.cpp
+e:\!罗傲\学习\数媒专业课\高级计算机图形学\projects\vslighttracing\vslighttracing\drawable\Drawable.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+Drawable\Drawable.cpp(32): warning C4305: “=”: 从“double”到“float”截断
+Drawable\Drawable.cpp(33): warning C4305: “=”: 从“double”到“float”截断
+Drawable\Drawable.cpp(34): warning C4305: “=”: 从“double”到“float”截断
+  GenerateImage.cpp
+GenerateImage.cpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+e:\!罗傲\学习\数媒专业课\高级计算机图形学\projects\vslighttracing\vslighttracing\drawable\Drawable.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+GenerateImage.cpp(135): warning C4305: “参数”: 从“double”到“float”截断
+GenerateImage.cpp(136): warning C4305: “参数”: 从“double”到“float”截断
+GenerateImage.cpp(137): warning C4305: “参数”: 从“double”到“float”截断
+GenerateImage.cpp(140): warning C4305: “参数”: 从“double”到“float”截断
+GenerateImage.cpp(141): warning C4305: “参数”: 从“double”到“float”截断
+GenerateImage.cpp(142): warning C4305: “参数”: 从“double”到“float”截断
+GenerateImage.cpp(143): warning C4305: “参数”: 从“double”到“float”截断
+GenerateImage.cpp(144): warning C4305: “参数”: 从“double”到“float”截断
+GenerateImage.cpp(146): warning C4305: “参数”: 从“double”到“float”截断
+GenerateImage.cpp(174): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+GenerateImage.cpp(193): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+  Light.cpp
+  PointLight.cpp
+  Ray.cpp
+  main.cpp
+e:\!罗傲\学习\数媒专业课\高级计算机图形学\projects\vslighttracing\vslighttracing\drawable\Drawable.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
