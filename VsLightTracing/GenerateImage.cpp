@@ -11,7 +11,7 @@
 
 void GenerateImage::readBaseImage() {
     //800*800
-    if ((bFile = fopen("base.bmp", "rb")) == NULL) {
+    if ((bFile = fopen("base_1600.bmp", "rb")) == NULL) {
         printf("read base.bmp failed.");
         exit(0);
     }
@@ -78,7 +78,7 @@ void GenerateImage::generate() {
 
     for (int i = 0; i < PORT; ++i) {
         for (int j = 0; j < PORT; ++j) {
-            p = &headPointer;
+            p = &head;
 			bool trace = false;
 			while (p->next != NULL) {
                 p = p->next;
@@ -118,7 +118,7 @@ void GenerateImage::generate() {
 				{
 					V[k] = viewVertex[i*PORT * 3 + j * 3 + k];
 				}
-				lightTracing(V, t, &color[i*PORT * 3 + j * 3], ball, 1);
+				lightTracing(V, O, t, &color[i*PORT * 3 + j * 3], ball, 2);
 			}
 
         }
@@ -128,38 +128,38 @@ void GenerateImage::generate() {
 
 }
 
-void GenerateImage::lightTracing(double * V, double t, double * color, BallDrawable *ball, int iteration) {
+void GenerateImage::lightTracing(double * V, float * origin, double t, double * color, BallDrawable *ball, int iteration) {
 
     if (t == BG_DIR || ball == NULL || iteration == 0) {
         return;
     }
 
 	// 如有镜面反射进入迭代
-	if (ball->getMirror())
+	bool ifMirror = ball->getMirror();
+	if (ifMirror)
 	{
-		mirror(V, t, color, ball, iteration);
-		return;
+		mirror(V, origin, t, color, ball, iteration);
 	}
 
     // 判断遮挡
-	bool shield = judgeShield(V, t, ball);
+	bool shield = judgeShield(V, origin, t, ball);
     // 处理光线
     for (int k = 0; k < 3; ++k) {
-        color[k] += ball->getRgb()[k] * ball->getAmbient();
+		color[k] += ball->getRgb()[k] * ball->getAmbient();
 		if (!shield)
 		{
-			diffuseSpecular(V, t, color, k, ball);
+			diffuseSpecular(V, origin, t, color, k, ball);
 		}
     }
 }
 
-bool GenerateImage::judgeShield(double * V, double t, BallDrawable * ball)
+bool GenerateImage::judgeShield(double * V, float * origin, double t, BallDrawable * ball)
 {
 	float P[3];
 
 	for (size_t k = 0; k < 3; k++)
 	{
-		P[k] = O[k] + t * V[k];
+		P[k] = origin[k] + t * V[k];
 	}
 	float V1[3];
 	for (size_t k = 0; k < 3; k++)
@@ -168,7 +168,7 @@ bool GenerateImage::judgeShield(double * V, double t, BallDrawable * ball)
 			+ (pointLight.getPosition()[1] - P[1])*(pointLight.getPosition()[1] - P[1])
 			+ (pointLight.getPosition()[2] - P[2])*(pointLight.getPosition()[2] - P[2]));
 	}
-	BallDrawable *p = &headPointer;
+	BallDrawable *p = &head;
 	while (p->next != NULL)
 	{
 		p = p->next;
@@ -200,12 +200,12 @@ bool GenerateImage::judgeShield(double * V, double t, BallDrawable * ball)
 	return false;
 }
 
-void GenerateImage::diffuseSpecular(double * V, double t, double * color, int k, BallDrawable *ball)
+void GenerateImage::diffuseSpecular(double * V, float * origin, double t, double * color, int k, BallDrawable *ball)
 {
 	float P[3];
 	for (size_t i1 = 0; i1 < 3; i1++)
 	{
-		P[i1] = O[i1] + t * V[i1];
+		P[i1] = origin[i1] + t * V[i1];
 	}
 	float N[3];
 	for (size_t i1 = 0; i1 < 3; i1++)
@@ -229,7 +229,7 @@ void GenerateImage::diffuseSpecular(double * V, double t, double * color, int k,
 		float V1[3];
 		for (size_t i1 = 0; i1 < 3; i1++)
 		{
-			V1[i1] = O[i1] - P[i1];
+			V1[i1] = origin[i1] - P[i1];
 		}
 		float H[3];
 		for (size_t i1 = 0; i1 < 3; i1++)
@@ -239,18 +239,25 @@ void GenerateImage::diffuseSpecular(double * V, double t, double * color, int k,
 		float NH = N[0] * H[0] + N[1] * H[1] + N[2] * H[2];
 		if (NH >= 1 / sqrt(2))
 		{
-			color[k] += ball->getRgb()[k] * ball->getSpecular()*pow(cos(2 * acos(NH)), 30);
+			if (ball->getMirror())
+			{
+				color[k] += ball->getRgb()[k] * ball->getSpecular()*pow(cos(2 * acos(NH)), 500);
+			}
+			else
+			{
+				color[k] += ball->getRgb()[k] * ball->getSpecular()*pow(cos(2 * acos(NH)), 30);
+			}
 		}
 	}
 
 }
 
-void GenerateImage::mirror(double * V, double t, double * color, BallDrawable *ball, int iteration)
+void GenerateImage::mirror(double * V, float * origin, double t, double * color, BallDrawable *ball, int iteration)
 {
 	float P[3];
 	for (size_t k = 0; k < 3; k++)
 	{
-		P[k] = O[k] + t * V[k];
+		P[k] = origin[k] + t * V[k];
 	}
 	float N[3];
 	for (size_t k = 0; k < 3; k++)
@@ -260,22 +267,58 @@ void GenerateImage::mirror(double * V, double t, double * color, BallDrawable *b
 	float L[3];
 	for (size_t k = 0; k < 3; k++)
 	{
-		L[k] = -V[k];
+		L[k] = V[k];
 	}
 	float NL = L[0] * N[0] + L[1] * N[1] + L[2] * N[2];
-	float V1[3];
+	double V1[3];
 	for (size_t k = 0; k < 3; k++)
 	{
 		V1[k] = L[k] - 2 * N[k] * NL;
 	}
 
 	//球求交
-	float t1 = 10000;
-	BallDrawable *p = &headPointer;
+	double t1 = 10000;
+	BallDrawable *p = &head;
+	BallDrawable *ball1 = NULL;
+	bool reflect = false;
+
 	while (p->next != NULL)
 	{
 		p = p->next;
-
+		if (p == ball)
+		{
+			continue;
+		}
+		float a = V1[0] * V1[0] + V1[1] * V1[1] + V1[2] * V1[2];
+		float b = 2 * (V1[0] * (P[0] - p->getPosition()[0])
+			+ V1[1] * (P[1] - p->getPosition()[1])
+			+ V1[2] * (P[2] - p->getPosition()[2]));
+		float c = ((P[0] - p->getPosition()[0])*(P[0] - p->getPosition()[0])
+			+ (P[1] - p->getPosition()[1])*(P[1] - p->getPosition()[1])
+			+ (P[2] - p->getPosition()[2])*(P[2] - p->getPosition()[2]))
+			- p->getRadius()*p->getRadius();
+		float derta = b*b - 4 * a*c;
+		if (derta >= 0)
+		{
+			double x = (-b - sqrt(derta)) / 2 * a;
+			if (x > 0 && t1 > x)
+			{
+				t1 = x;
+				reflect = true;
+				ball1 = p;
+			}
+		}
+	}
+	if (reflect)
+	{
+		lightTracing(V1, P, t1, color, ball1, iteration - 1);
+	}
+	else
+	{
+		for (size_t k = 0; k < 3; k++)
+		{
+			color[k] += 0.1;
+		}
 	}
 	//光源
 	
@@ -283,9 +326,9 @@ void GenerateImage::mirror(double * V, double t, double * color, BallDrawable *b
 }
 
 void GenerateImage::setThings() {
-	headPointer.next = &firBall;
+	head.next = &firBall;
 	firBall.next = &secBall;
-	//secBall.next = &mirBall;
+	secBall.next = &mirBall;
 
 	firBall.setRadius(0.2);
 	firBall.setPosition(0.7, 0.2, -0.8);
@@ -299,7 +342,12 @@ void GenerateImage::setThings() {
 	secBall.setRgb(0.6, 1, 0.3);
 
 	mirBall.setMirror(true);
-	
+	mirBall.setRadius(0.2);
+	mirBall.setPosition(0.2, -0.2, -1.2);
+	mirBall.setAmbient(0.1);
+	mirBall.setDiffuse(0.1);
+	mirBall.setSpecular(1);
+	mirBall.setRgb(0.9, 0.3, 0.3);
 
 	pointLight.setPosition(-1, 0.2, -0.8);
 	pointLight.setRGB(1, 1, 1);

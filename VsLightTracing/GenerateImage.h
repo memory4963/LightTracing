@@ -9,7 +9,7 @@
 #include "Drawable/BallDrawable.h"
 #include "Light/PointLight.h"
 
-#define PORT 800
+#define PORT 1600
 #define BG_DIR 10
 
 
@@ -28,7 +28,7 @@ private:
     double *point;
     double *color;
 
-    BallDrawable headPointer;
+    BallDrawable head;
     BallDrawable secBall;
     BallDrawable firBall;
 	BallDrawable mirBall;
@@ -41,13 +41,13 @@ private:
 
     void setThings();
 
-	void lightTracing(double * V, double t, double * color, BallDrawable *ball, int iteration);
+	void lightTracing(double * V, float * origin, double t, double * color, BallDrawable *ball, int iteration);
 
-	bool judgeShield(double * V, double t, BallDrawable * ball);
+	bool judgeShield(double * V, float * origin, double t, BallDrawable * ball);
 
-	void diffuseSpecular(double * V, double t, double * color, int k, BallDrawable *ball);
+	void diffuseSpecular(double * V, float * origin, double t, double * color, int k, BallDrawable *ball);
 
-	void mirror(double * V, double t, double * color, BallDrawable *ball, int iteration);
+	void mirror(double * V, float * origin, double t, double * color, BallDrawable *ball, int iteration);
 
     void generateImage();
 };
